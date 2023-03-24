@@ -3,7 +3,7 @@
 # Contributor: Cimbali
 
 pkgname=python-pympress
-pkgver=1.8.0
+pkgver=1.8.1
 pkgrel=1
 pkgdesc="Simple yet powerful dual-screen PDF reader designed for presentations"
 url="https://github.com/Cimbali/pympress"
@@ -14,8 +14,8 @@ depends=('python' 'poppler' 'poppler-glib' 'python-gobject' 'python-cairo' 'gtk3
 optdepends=('gstreamer: for media playback' 'gst-plugins-base: for media playback' 'gst-plugin-gtk: for media playback'
 			'gst-plugins-good: additional media codecs' 'gst-libav: additional media codecs' 'gst-plugins-bad: additional media codecs' 'gst-plugins-ugly: additional media codecs'
 			'vlc: alternative media playback option' 'python-vlc: alternative media playback option')
-source=("https://files.pythonhosted.org/packages/70/a0/08ead2b665bea74f291466fca2996fb784110777ec441347e10555534135/pympress-1.8.0.tar.gz")
-sha256sums=('160255c6dcfa5fa6bc69b40b1bde3c4ba7c10f750aeee2d6bc1877d343f743ec')
+source=("https://files.pythonhosted.org/packages/8c/1f/6d081d546bd57fd2b6537bd6dcb204a96f5490150b0f1ed8e152fe0e484a/pympress-1.8.1.tar.gz")
+sha256sums=('448c6abc9c74373311be5fff5e09d5dc32e7a18459290180eb34f3373d9ba4ce')
 
 build() {
     cd $srcdir/pympress-$pkgver
