@@ -2,27 +2,40 @@
 # Contributor: twiggers
 # Contributor: Cimbali
 
-pkgname=python-pympress
+pkgname=pympress
 pkgver=1.8.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple yet powerful dual-screen PDF reader designed for presentations"
 url="https://github.com/Cimbali/pympress"
 license=('GPL-v2')
 arch=('any')
-makedepends=('python-setuptools')
+
+source=("https://github.com/Cimbali/pympress/releases/download/v1.8.1/pympress-1.8.1.tar.gz")
+sha256sums=('35867d6ad060b00edac1404e5033d275f22f0a41d2d9e04746d5c699aa879235')
+
+# build using wheel, sphinx/myst-parser for docs building
+makedepends=('python' 'python-setuptools' 'python-pip' 'python-wheel' 'python-sphinx' 'python-myst-parser')
 depends=('python' 'poppler' 'poppler-glib' 'python-gobject' 'python-cairo' 'gtk3' 'python-watchdog')
-optdepends=('gstreamer: for media playback' 'gst-plugins-base: for media playback' 'gst-plugin-gtk: for media playback'
-			'gst-plugins-good: additional media codecs' 'gst-libav: additional media codecs' 'gst-plugins-bad: additional media codecs' 'gst-plugins-ugly: additional media codecs'
-			'vlc: alternative media playback option' 'python-vlc: alternative media playback option')
-source=("https://files.pythonhosted.org/packages/8c/1f/6d081d546bd57fd2b6537bd6dcb204a96f5490150b0f1ed8e152fe0e484a/pympress-1.8.1.tar.gz")
-sha256sums=('448c6abc9c74373311be5fff5e09d5dc32e7a18459290180eb34f3373d9ba4ce')
+# 3 different optdepends: base media playback, extended codecs for same media playback, alternative option using vlc
+optdepends=(
+	'gstreamer: for media playback' 'gst-plugins-base: for media playback' 'gst-plugin-gtk: for media playback'
+	'gst-plugins-good: additional media codecs' 'gst-libav: additional media codecs' 'gst-plugins-bad: additional media codecs' 'gst-plugins-ugly: additional media codecs'
+	'vlc: alternative media playback option' 'python-vlc: alternative media playback option'
+)
 
 build() {
-    cd $srcdir/pympress-$pkgver
-    python setup.py build
+	cd "$srcdir/pympress-$pkgver/"
+    python -m pip wheel --verbose --progress-bar off --disable-pip-version-check --use-pep517 --no-build-isolation --no-deps --wheel-dir build/ .
+    python -m pip sphinx -a -d build/doctrees/ -D skip_api_doc=1 -D packaged_docs=1 -b html docs/ build/html/
+    python -m pip sphinx -a -d build/doctrees/ -D skip_api_doc=1 -D packaged_docs=1 -b man docs/ build/man/
 }
 
 package() {
-    cd $srcdir/pympress-$pkgver
-    python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+	cd "$srcdir/pympress-$pkgver/"
+
+	python -m pip install --verbose --progress-bar off --disable-pip-version-check --root="${pkgdir}" --no-compile --ignore-installed --no-deps --no-index --find-links build/
+
+	install -Dm644 build/man/pympress.1 "$pkgdir/usr/share/man/man1/$pkgbase.1"
+	cd build/html
+	find * -type f -exec install -Dm644 "$pkgdir/usr/share/doc/$pkgbase/{}" ';'
 }
