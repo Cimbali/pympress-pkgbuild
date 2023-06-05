@@ -3,15 +3,15 @@
 # Contributor: Cimbali
 
 pkgname=pympress
-pkgver=1.8.2
+pkgver=1.8.3a
 pkgrel=1
 pkgdesc="Simple yet powerful dual-screen PDF reader designed for presentations"
 url="https://github.com/Cimbali/pympress"
 license=('GPL-v2')
 arch=('any')
 
-source=("https://github.com/Cimbali/pympress/releases/download/v1.8.2/pympress-1.8.2.tar.gz")
-sha256sums=('89e616b82f6d5fac2baf02f3a6450612c720bd6b70822efaa41865b4e9b89a86')
+source=("https://github.com/Cimbali/pympress/releases/download/v1.8.3a/pympress-1.8.3a.tar.gz")
+sha256sums=('1b79dbe658c2d702edcb435ef00a9c517a9975059ac81034fc8f5f71fb90e3d8')
 
 # build using wheel, sphinx/myst-parser for docs building
 makedepends=('python' 'python-setuptools' 'python-pip' 'python-wheel' 'python-sphinx' 'python-myst-parser')
