@@ -1,6 +1,6 @@
 pkgbase = python-pympress
 	pkgdesc = Dual-screen PDF reader designed for presentations
-	pkgver = 1.8.4
+	pkgver = 1.8.5
 	pkgrel = 1
 	url = https://github.com/Cimbali/pympress
 	arch = any
@@ -22,7 +22,7 @@ pkgbase = python-pympress
 	optdepends = gst-plugins-ugly: additional media codecs
 	optdepends = vlc: alternative media playback option
 	optdepends = python-vlc: alternative media playback option
-	source = https://github.com/Cimbali/pympress/releases/download/v1.8.4/pympress-1.8.4.tar.gz
-	sha256sums = 5d30672b94bd194bef9a7d9398755b6cccaf407c619196b2d90c310afea964ed
+	source = https://github.com/Cimbali/pympress/releases/download/v1.8.5/pympress-1.8.5.tar.gz
+	sha256sums = 0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5
 
 pkgname = python-pympress
